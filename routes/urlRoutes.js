@@ -63,4 +63,14 @@ router.get("/analytics/:shortId", async (req, res) => {
   }
 });
 
+// GET / - Get list of all shortened ids
+router.get('/', async (req, res) => {
+  try {
+    const ids = await Url.find({}).sort({_id: -1})
+    res.json({ids})
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+})
+
 export default router;
